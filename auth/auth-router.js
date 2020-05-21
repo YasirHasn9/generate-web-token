@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const Users = require("../users/users-model");
 
 router.post("/register", async (req, res, next) => {
@@ -32,11 +33,17 @@ router.post("/login", async (req, res, next) => {
   try {
     const user = await Users.findBy({ username: req.body.username });
 
-    if (user && bcrypt.compareSync(req.body.password, user.password)) {
-      res.status(201).json({ message: `welcome ${user.username}` });
-    } else {
+    if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
       res.status(401).json(authError);
     }
+
+    const payload = {
+      userId: user.id,
+      department: user.department
+    };
+    const secret = process.env.TOKEN_SECRET || "secret of token";
+    const token = jwt.sign(payload, secret);
+    res.status(201).json({ message: `welcome ${user.username}`, token });
   } catch (err) {
     console.log("/login", err);
     next(err);
