@@ -41,7 +41,7 @@ router.post("/login", async (req, res, next) => {
       userId: user.id,
       department: user.department
     };
-    const secret = process.env.TOKEN_SECRET || "secret of token";
+    const secret = process.env.TOKEN_SECRET || "keep it secret, keep it save";
     const token = jwt.sign(payload, secret);
 
     res.cookie("token", token);
@@ -52,4 +52,5 @@ router.post("/login", async (req, res, next) => {
     next(err);
   }
 });
+
 module.exports = router;

@@ -10,14 +10,16 @@ function restricted() {
     try {
       const token = req.cookies.token;
       if (!token) {
-        res.status(401).json(authError);
+        return res.status(401).json({ token: authError });
       }
-      jwt.verify("token", process.env.TOKEN_SECRET, (err, decodedPayload) => {
+
+      jwt.verify(token, process.env.TOKEN_SECRET, (err, decodedPayload) => {
         req.token = decodedPayload;
-        if (err) {
-          res.status(401).json(authError);
-        }
-        next;
+        // if (err) {
+        //   console.log("err", err);
+        //   return res.status(401).json({ token: authError });
+        // }
+        next();
       });
     } catch (err) {
       console.log("restricted", err);
