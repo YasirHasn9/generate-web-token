@@ -22,6 +22,6 @@ async function add(user) {
 
 async function findById(id) {
   return await db("users")
-    .where(id)
+    .where({id})
     .first();
 }
