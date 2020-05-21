@@ -1,0 +1,24 @@
+{
+  "name": "jsonwebtoken",
+  "version": "1.0.0",
+  "description": "## Topics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YasirHasn9/jsonwebtoken.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YasirHasn9/jsonwebtoken/issues"
+  },
+  "homepage": "https://github.com/YasirHasn9/jsonwebtoken#readme",
+  "dependencies": {
+    "knex": "^0.21.1",
+    "sqlite3": "^4.2.0"
+  }
+}
